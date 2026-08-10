@@ -1,0 +1,17 @@
+
+> apt-defect-info@0.0.1 dev
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.20.10.7:3000
+- Environments: .env
+✓ Ready in 530ms
+
+ GET / 200 in 1433ms (next.js: 470ms, application-code: 963ms)
+✓ Compiled in 254ms
+ GET / 200 in 771ms (next.js: 183ms, application-code: 588ms)
+ GET / 200 in 312ms (next.js: 12ms, application-code: 300ms)
+ GET / 200 in 210ms (next.js: 16ms, application-code: 195ms)
+ GET / 200 in 209ms (next.js: 71ms, application-code: 138ms)
+ GET / 200 in 390ms (next.js: 7ms, application-code: 383ms)

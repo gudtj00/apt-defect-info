@@ -1,0 +1,25 @@
+name: Checks
+
+# Phase 1(금지어 lint) + Phase 2(계산 엔진 검증)를 CI에서 강제한다.
+# 이 저장소가 아직 git/GitHub에 연결되지 않았다면 이 워크플로는 활성화되지 않는다 —
+# git init 및 GitHub 원격 저장소 연결 후 push하면 자동으로 동작한다.
+# node-version 24: lib/warranty-calc.test.ts를 별도 빌드 도구 없이 네이티브로 실행하기 위함.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: 금지어 lint 회귀 테스트
+        run: node scripts/legal-lint.test.mjs
+      - name: 금지어 lint 실행
+        run: node scripts/legal-lint.mjs
+      - name: 담보책임기간 계산 엔진 검증
+        run: node lib/warranty-calc.test.ts

@@ -1,0 +1,83 @@
+{
+  "total": 1240,
+  "bcompanyFilled": 1240,
+  "usedateFilled": 1237,
+  "errors": 0,
+  "byRegion": {
+    "서울특별시": {
+      "total": 200,
+      "bcompanyFilled": 200,
+      "usedateFilled": 198
+    },
+    "전남광주통합특별시": {
+      "total": 100,
+      "bcompanyFilled": 100,
+      "usedateFilled": 99
+    },
+    "부산광역시": {
+      "total": 80,
+      "bcompanyFilled": 80,
+      "usedateFilled": 80
+    },
+    "대구광역시": {
+      "total": 60,
+      "bcompanyFilled": 60,
+      "usedateFilled": 60
+    },
+    "인천광역시": {
+      "total": 60,
+      "bcompanyFilled": 60,
+      "usedateFilled": 60
+    },
+    "대전광역시": {
+      "total": 40,
+      "bcompanyFilled": 40,
+      "usedateFilled": 40
+    },
+    "울산광역시": {
+      "total": 34,
+      "bcompanyFilled": 34,
+      "usedateFilled": 34
+    },
+    "세종특별자치시": {
+      "total": 6,
+      "bcompanyFilled": 6,
+      "usedateFilled": 6
+    },
+    "경기도": {
+      "total": 320,
+      "bcompanyFilled": 320,
+      "usedateFilled": 320
+    },
+    "충청북도": {
+      "total": 40,
+      "bcompanyFilled": 40,
+      "usedateFilled": 40
+    },
+    "충청남도": {
+      "total": 60,
+      "bcompanyFilled": 60,
+      "usedateFilled": 60
+    },
+    "경상북도": {
+      "total": 60,
+      "bcompanyFilled": 60,
+      "usedateFilled": 60
+    },
+    "경상남도": {
+      "total": 80,
+      "bcompanyFilled": 80,
+      "usedateFilled": 80
+    },
+    "강원특별자치도": {
+      "total": 60,
+      "bcompanyFilled": 60,
+      "usedateFilled": 60
+    },
+    "전북특별자치도": {
+      "total": 40,
+      "bcompanyFilled": 40,
+      "usedateFilled": 40
+    }
+  }
+}

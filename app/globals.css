@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+}
+
+.defect-markdown {
+  counter-reset: step;
+}
+.defect-markdown h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 1.6rem 0 0.6rem;
+}
+.defect-markdown h2 {
+  counter-increment: step;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 2rem 0 0.8rem;
+}
+.defect-markdown h2::before {
+  content: counter(step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  background: #059669;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.defect-markdown h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.2rem 0 0.5rem;
+  color: #065f46;
+}
+.defect-markdown p {
+  line-height: 1.7;
+  margin: 0.7rem 0;
+}
+.defect-markdown strong {
+  font-weight: 700;
+}
+.defect-markdown a {
+  color: #059669;
+  text-decoration: underline;
+}
+.defect-markdown ul,
+.defect-markdown ol {
+  margin: 0.7rem 0;
+  padding-left: 1.3rem;
+  line-height: 1.7;
+}
+.defect-markdown ul {
+  list-style: none;
+  padding-left: 0.2rem;
+}
+.defect-markdown ul > li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin: 0.4rem 0;
+}
+.defect-markdown ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.65rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: #34d399;
+}
+.defect-markdown ol > li {
+  margin: 0.4rem 0;
+}
+.defect-markdown blockquote {
+  margin: 0.8rem 0;
+  padding: 0.7rem 1rem;
+  border-left: 3px solid #6ee7b7;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  border-radius: 0 8px 8px 0;
+}
+.defect-markdown blockquote p {
+  margin: 0.2rem 0;
+}
+/* 참고/비고 콜아웃 — 중첩 블록쿼트(> >)로 작성하면 법령 원문 인용과 다르게 강조된다 */
+.defect-markdown blockquote blockquote {
+  margin: 0.6rem 0 0;
+  padding: 0.6rem 0.9rem;
+  border-left: 3px solid #fbbf24;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: 0.85rem;
+}
+.defect-markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  font-size: 0.85rem;
+}
+.defect-markdown th,
+.defect-markdown td {
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+.defect-markdown th {
+  background: #f8fafc;
+  font-weight: 700;
+}
+/* 정확히 3열인 표(설비·조문 등 짧은 라벨 + 긴 설명)는 앞 두 열을 좁게 고정해 줄바꿈을 막는다 */
+.defect-markdown table:has(th:nth-child(3):last-child) th:nth-child(1),
+.defect-markdown table:has(th:nth-child(3):last-child) td:nth-child(1),
+.defect-markdown table:has(th:nth-child(3):last-child) th:nth-child(2),
+.defect-markdown table:has(th:nth-child(3):last-child) td:nth-child(2) {
+  white-space: nowrap;
+  width: 1%;
+}
+.defect-markdown hr {
+  margin: 1.5rem 0;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+}

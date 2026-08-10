@@ -1,0 +1,488 @@
+{
+  "source": {
+    "notice": "공동주택 하자의 조사, 보수비용 산정 및 하자판정기준 (국토교통부 고시 제2026-360호, 2026-07-08)",
+    "verifiedAt": "2026-08-04",
+    "note": "제7조~제44조(38개 조문)를 전수 확인. 조사방법·보수비용 조문 번호는 원문의 명시적 상호참조('제N조에 따른...')를 grep으로 직접 대조해서 확정했다 — 기억이나 오프셋 추정으로 채우지 않았다."
+  },
+  "knownGaps": [],
+  "resolvedGaps": [
+    {
+      "article": "제23조(조명기구 옥내배선)",
+      "resolvedAt": "2026-08-05",
+      "finding": "전용 조사조문 없음 — 제84조(미시공 및 변경시공하자의 조사) 일반원칙 적용으로 판단",
+      "method": "조사 조문(제3장) 번호 흐름을 원문 대조: 제60조(22조 창호기능)→제61조(24조 조명설비, '제24조 각 호에 따른'이라고 명시)→제62조(25조)→제63조(26조, '제26조에 따른'이라고 명시)→제64조(27조)→...로 이어지며, 23조만 전용 조사조문이 없다. 24조 이후로는 모두 해당 판정조문을 명시적으로 인용하고 있어 우연한 누락이 아니라 의도된 설계로 판단된다. 제3장 마지막 조문인 제84조가 '사용검사 받은 설계도서와 현재 시공상태를 비교'하는 일반 조사원칙을 규정하고 있고, 23조의 판정기준 자체가 '정해진 배선방식(설계도서 기준)을 지켰는지'를 다투는 내용이라 제84조의 적용 대상과 정확히 일치한다.",
+      "note": "공식 유권해석이나 하자심사·분쟁조정위원회 결정례로 확인된 것은 아니며, 조문 구조 대조를 근거로 한 합리적 해석이다."
+    },
+    {
+      "article": "제26조(난방설비) / 제29조(감시제어설비)",
+      "resolvedAt": "2026-08-05",
+      "finding": "전용 보수비용 조문 없음 — 제86조~제88조(하자보수비용 산출기준 등) 일반원칙 적용으로 판단",
+      "method": "제4장(하자보수비용 산정)은 제85조(비용 구성)~제88조(경감기준) 일반원칙으로 시작한 뒤 제89조부터 균열·철근노출·누수 등 개별 유형별 세부 산정방법을 덧붙이는 구조다. 설비 관련 세부조문 번호 흐름을 대조하면 제104조(스프링클러)→제105조(23조)→제106조(24조)→제107조(25조)→[26조 없음]→제108조(27조)→제109조(28조)→[29조 없음]→제110조(30조)로, 26조와 29조만 전용 세부조문이 없다. 세부조문은 일반원칙(85~88조) 위에 특정 유형만 더 구체화한 것이므로, 세부조문이 없는 유형은 일반원칙만으로 산정하는 것으로 판단된다.",
+      "note": "공식 유권해석이나 하자심사·분쟁조정위원회 결정례로 확인된 것은 아니며, 조문 구조 대조를 근거로 한 합리적 해석이다."
+    }
+  ],
+  "types": [
+    {
+      "code": "7",
+      "name": "콘크리트 균열",
+      "judgmentArticle": "제7조",
+      "investigationArticle": "제46조",
+      "repairCostArticle": "제89조",
+      "warrantyCategoryCode": "17",
+      "phenomenonTags": [
+        "균열"
+      ]
+    },
+    {
+      "code": "8",
+      "name": "콘크리트 철근노출",
+      "judgmentArticle": "제8조",
+      "investigationArticle": "제47조",
+      "repairCostArticle": "제90조",
+      "warrantyCategoryCode": "17",
+      "phenomenonTags": [],
+      "plainExplanation": "철근이 콘크리트 밖으로 드러나 보이면 그 자체로 하자입니다. 손상 정도나 안전 여부를 따지지 않고, 노출됐다는 사실만으로 시공하자로 인정됩니다."
+    },
+    {
+      "code": "9",
+      "name": "마감부위 균열 등",
+      "judgmentArticle": "제9조",
+      "investigationArticle": "제46조(⑤항)",
+      "repairCostArticle": "제89조(③④항)",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [
+        "균열",
+        "들뜸및탈락",
+        "오염및변색"
+      ]
+    },
+    {
+      "code": "10",
+      "name": "누수",
+      "judgmentArticle": "제10조",
+      "investigationArticle": "제48조",
+      "repairCostArticle": "제91조",
+      "warrantyCategoryCode": "21",
+      "warrantyCategoryNote": "방수공사(21) 기준이나 조문상 비방수공사·창호공사(7)로도 구분됨 — 별표2 참고",
+      "phenomenonTags": [
+        "누수"
+      ]
+    },
+    {
+      "code": "11",
+      "name": "신축줄눈",
+      "judgmentArticle": "제11조",
+      "investigationArticle": "제49조",
+      "repairCostArticle": "제92조",
+      "warrantyCategoryCode": "17",
+      "phenomenonTags": [],
+      "plainExplanation": "온도 변화로 바닥이 늘었다 줄었다 하는 걸 흡수해주는 이음매(신축줄눈)를 설계도서대로 안 만들었으면 하자입니다. 설계도서에 없더라도 옥상은 4m(단열재 시공 시 2.5m) 이내, 지하주차장은 6m 이내 간격, 폭 3mm 이상, 깊이는 두께의 1/5 이상이라는 최소 기준을 못 채우면 하자로 볼 수 있습니다."
+    },
+    {
+      "code": "12",
+      "name": "긴결재",
+      "judgmentArticle": "제12조",
+      "investigationArticle": "제50조",
+      "repairCostArticle": "제93조",
+      "warrantyCategoryCode": "17",
+      "phenomenonTags": [],
+      "plainExplanation": "거푸집을 고정할 때 쓰는 철물(긴결재)이 벽에 튀어나온 채 남아있거나, 그걸 뽑고 난 구멍을 제대로 안 메우면 하자입니다."
+    },
+    {
+      "code": "13",
+      "name": "관통부 마감",
+      "judgmentArticle": "제13조",
+      "investigationArticle": "제51조",
+      "repairCostArticle": "제94조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [],
+      "plainExplanation": "배관이나 배선이 벽을 뚫고 지나가는 자리 주변을 꼼꼼히 메우지 않아서 냄새나 소음이 새어 들어오면 하자입니다. 방화구획(불이 안 번지게 막아야 하는 벽)을 뚫는 경우엔 별도 화재안전기준까지 충족해야 합니다."
+    },
+    {
+      "code": "14",
+      "name": "덕트 미장",
+      "judgmentArticle": "제14조",
+      "investigationArticle": "제52조",
+      "repairCostArticle": "제95조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [],
+      "plainExplanation": "에어덕트(환기 통로) 벽을 벽돌로 쌓은 뒤 그 위에 미장(마감 바르기)을 빠뜨리면, 벌레나 냄새가 들어올 수 있어 하자로 봅니다. 다만 덕트 안에 별도 배기관을 설치했거나, 통로가 좁아 미장 자체가 물리적으로 어려운 자리, 파이프 덕트처럼 기능·미관에 지장이 없는 경우는 하자가 아닙니다."
+    },
+    {
+      "code": "15",
+      "name": "결로",
+      "judgmentArticle": "제15조",
+      "investigationArticle": "제53조",
+      "repairCostArticle": "제96조",
+      "warrantyCategoryCode": "14",
+      "phenomenonTags": [
+        "결로"
+      ]
+    },
+    {
+      "code": "16",
+      "name": "주방 싱크대 하부 및 배면 마감",
+      "judgmentArticle": "제16조",
+      "investigationArticle": "제54조",
+      "repairCostArticle": "제97조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [],
+      "plainExplanation": "싱크대 밑이나 뒷면에 마감재를 바르기로 설계도서에 나와 있는데 안 발랐으면 하자입니다. 설계도서에 마감재 표시가 아예 없더라도, 별도 마감재나 미장·쇠흙손 마감조차 안 했으면 역시 하자로 봅니다."
+    },
+    {
+      "code": "17",
+      "name": "욕실 문턱 및 거울변색",
+      "judgmentArticle": "제17조",
+      "investigationArticle": "제55조",
+      "repairCostArticle": "제98조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [
+        "오염및변색"
+      ],
+      "plainExplanation": "욕실 문턱 높이가 기준(설계도서에 명시된 값, 없으면 물 넘침을 막는 최소 50mm)보다 낮으면 하자입니다. 욕실 거울에 부식 방지 코팅을 안 해서 변색됐다면 이것도 하자지만, 입주자가 잘못 써서 그런 거라면 하자가 아닙니다."
+    },
+    {
+      "code": "18",
+      "name": "타일",
+      "judgmentArticle": "제18조",
+      "investigationArticle": "제56조",
+      "repairCostArticle": "제99조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [
+        "균열",
+        "들뜸및탈락"
+      ],
+      "plainExplanation": "타일이 갈라지거나(균열), 깨지거나(파손), 떨어지거나(탈락), 들뜨면 하자입니다. 벽 타일은 뒤채움(타일 뒤 접착 모르타르)이 80% 미만이면 일단 하자로 봅니다 — 다만 다툼이 생기면 실제 접착강도를 재서 기준(0.392MPa) 이상이면 하자가 아닌 걸로 뒤집을 수 있습니다."
+    },
+    {
+      "code": "19",
+      "name": "트렌치 시공 등",
+      "judgmentArticle": "제19조",
+      "investigationArticle": "제57조",
+      "repairCostArticle": "제100조",
+      "warrantyCategoryCode": "17",
+      "phenomenonTags": [],
+      "plainExplanation": "물이 흐르도록 만드는 배수로(트렌치)를 설계도서대로 안 만들었거나, 만들었어도 물이 잘 안 빠지면 하자입니다. 다만 현장 여건에 맞춰 깊이를 조정했는데 기능상 문제가 없다면 하자가 아닙니다."
+    },
+    {
+      "code": "20",
+      "name": "바닥 배수물매",
+      "judgmentArticle": "제20조",
+      "investigationArticle": "제58조",
+      "repairCostArticle": "제101조",
+      "warrantyCategoryCode": "17",
+      "phenomenonTags": [],
+      "plainExplanation": "지하주차장이나 옥상, 욕실 같은 물 쓰는 공간의 바닥 기울기(물매)가 잘못돼서 물이 안 빠지고 고이면 하자입니다. 다만 소량의 물이 고이는 정도로 기능에 지장이 없거나, 애초에 설계에 물매가 반영 안 된 경우는 하자가 아닙니다."
+    },
+    {
+      "code": "21",
+      "name": "목재 창호",
+      "judgmentArticle": "제21조",
+      "investigationArticle": "제59조",
+      "repairCostArticle": "제102조",
+      "warrantyCategoryCode": "7",
+      "phenomenonTags": [],
+      "plainExplanation": "욕실·세탁실·샤워실처럼 물을 쓰는 공간의 문짝 위아래 끝면에 방수 처리(래핑지나 조합페인트)를 안 했으면 하자입니다. 물을 안 쓰는 공간은 애초에 썩을 위험이 없어서 하자가 아닙니다."
+    },
+    {
+      "code": "22",
+      "name": "창호 기능",
+      "judgmentArticle": "제22조",
+      "investigationArticle": "제60조",
+      "repairCostArticle": "제103조",
+      "warrantyCategoryCode": "7",
+      "phenomenonTags": [
+        "기능불량"
+      ],
+      "plainExplanation": "문이나 창문이 뒤틀리거나 잘 안 열리고 닫히거나, 바람이 심하게 새면 하자입니다. 손잡이가 없어서 여닫기 불편하거나, 문턱 없는 방문 아래 틈이 너무 벌어졌거나, 잠금장치가 없거나 고장났어도 하자로 봅니다."
+    },
+    {
+      "code": "23",
+      "name": "조명기구 옥내배선",
+      "judgmentArticle": "제23조",
+      "investigationArticle": "제84조",
+      "investigationNote": "23조 전용 조사조문은 없음 — 일반원칙(미시공·변경시공하자의 조사) 적용(resolvedGaps 참고)",
+      "repairCostArticle": "제105조",
+      "warrantyCategoryCode": "9",
+      "phenomenonTags": [],
+      "plainExplanation": "2중 천장 속 조명 배선을 정해진 방식(케이블, 금속전선관, 합성수지관 등)으로 안 하면 하자입니다. 다만 배선 길이가 30cm 이하이고 조명기구에 직접 닿을 위험이 없으면 하자가 아닙니다."
+    },
+    {
+      "code": "24",
+      "name": "조명설비",
+      "judgmentArticle": "제24조",
+      "investigationArticle": "제61조",
+      "repairCostArticle": "제106조",
+      "warrantyCategoryCode": "9",
+      "phenomenonTags": [
+        "기능불량",
+        "들뜸및탈락"
+      ],
+      "plainExplanation": "조명기구가 설계와 다르거나(규격오류), 켤 때 소음·탄내·연기·스파크가 나거나 고장나거나(작동불량), 입주자 잘못 없이 떨어지거나(탈락), 스위치를 눌러도 안 켜지면(결선불량) — 전부 하자입니다."
+    },
+    {
+      "code": "25",
+      "name": "공기조화·냉방설비",
+      "judgmentArticle": "제25조",
+      "investigationArticle": "제62조",
+      "repairCostArticle": "제107조",
+      "warrantyCategoryCode": "3",
+      "phenomenonTags": [
+        "기능불량"
+      ],
+      "plainExplanation": "환풍기·에어컨·후드가 설계도서와 다르거나(규격오류), 작동을 안 하거나 기능이 떨어지거나(기능불량), 배관·배선 연결이 잘못됐으면(결선불량) 하자입니다."
+    },
+    {
+      "code": "26",
+      "name": "난방설비",
+      "judgmentArticle": "제26조",
+      "investigationArticle": "제63조",
+      "repairCostArticle": "제86조~제88조",
+      "repairCostNote": "26조 전용 보수비용 조문은 없음 — 일반원칙(하자보수비용 산출기준 등) 적용(resolvedGaps 참고)",
+      "warrantyCategoryCode": "3",
+      "phenomenonTags": [
+        "기능불량"
+      ],
+      "plainExplanation": "거실이나 침실별로 난방 온도를 따로 조절할 수 없으면 원칙적으로 하자입니다. 다만 드레스룸·알파룸·파우더룸·욕실 같은 부속공간을 설계도서대로 만들었다면 거기까지 개별 조절이 안 돼도 하자가 아닙니다."
+    },
+    {
+      "code": "27",
+      "name": "급·배수 위생설비",
+      "judgmentArticle": "제27조",
+      "investigationArticle": "제64조",
+      "repairCostArticle": "제108조",
+      "warrantyCategoryCode": "4",
+      "phenomenonTags": [
+        "기능불량",
+        "들뜸및탈락"
+      ],
+      "plainExplanation": "세면대·샤워기·싱크대 같은 위생기구가 설계와 다르거나, 들뜨거나 떨어지거나 파손됐거나, 배관 연결부에서 물이 새거나, 물이 기준 수압(세면기 3L/분, 샤워기·욕조·싱크대 4L/분)보다 약하게 나오거나 온수 온도가 설계 온도의 80% 미만(기준 없으면 43℃ 미만)이면 전부 하자입니다."
+    },
+    {
+      "code": "28",
+      "name": "통신·신호 등의 설비",
+      "judgmentArticle": "제28조",
+      "investigationArticle": "제65조",
+      "repairCostArticle": "제109조",
+      "warrantyCategoryCode": "11",
+      "phenomenonTags": [
+        "기능불량"
+      ],
+      "plainExplanation": "인터폰·홈오토메이션이 설계와 다르거나, 통화가 잘 안 되거나 화질이 나쁘거나, 배선 연결이 잘못됐으면 하자입니다."
+    },
+    {
+      "code": "29",
+      "name": "감시제어설비",
+      "judgmentArticle": "제29조",
+      "investigationArticle": "제66조",
+      "repairCostArticle": "제86조~제88조",
+      "repairCostNote": "29조 전용 보수비용 조문은 없음 — 일반원칙(하자보수비용 산출기준 등) 적용(resolvedGaps 참고)",
+      "warrantyCategoryCode": "11",
+      "phenomenonTags": [],
+      "plainExplanation": "설계도서나 법(주택법·주차장법)에 CCTV를 달기로 돼 있는데 안 달았으면 미시공하자입니다. CCTV를 달았어도 성능이 현저히 떨어지거나 사각지대가 심하면 현장 상황에 따라 하자로 볼 수 있습니다."
+    },
+    {
+      "code": "30",
+      "name": "조경수 고사 및 입상불량",
+      "judgmentArticle": "제30조",
+      "investigationArticle": "제67조",
+      "repairCostArticle": "제110조",
+      "warrantyCategoryCode": "8",
+      "phenomenonTags": [],
+      "plainExplanation": "심은 나무의 가지 3분의 2 이상이 말라 죽었거나 회복 불가능할 정도로 상태가 나쁘면 '고사'로 보고 하자입니다. 지지대가 부실해서 나무가 쓰러졌어도 하자입니다. 다만 관리 소홀이나 인위적 훼손이 입증되면 하자가 아닙니다."
+    },
+    {
+      "code": "31",
+      "name": "조경수 뿌리분 결속재료",
+      "judgmentArticle": "제31조",
+      "investigationArticle": "제68조",
+      "repairCostArticle": "제111조",
+      "warrantyCategoryCode": "8",
+      "phenomenonTags": [],
+      "plainExplanation": "나무를 심을 때 뿌리뭉치를 감싼 끈이나 철사(결속재료)가 준공 2년이 지나서도 땅 위에 그대로 남아있으면 하자입니다. 다만 자연히 분해되는 재료를 썼다면 하자가 아닙니다."
+    },
+    {
+      "code": "32",
+      "name": "조경수 식재 불일치",
+      "judgmentArticle": "제32조",
+      "investigationArticle": "제69조",
+      "repairCostArticle": "제112조",
+      "warrantyCategoryCode": "8",
+      "phenomenonTags": [],
+      "plainExplanation": "설계도서와 다른 수종을, 그것도 더 싼 걸로 심었으면 하자입니다. 아예 심어야 할 나무를 빠뜨렸어도 하자입니다. 다만 담보책임기간 안에 입주자대표회의·관리주체 요청으로 규격에 맞는 나무로 바꿔 심거나 추가로 심었다면 하자가 아닙니다."
+    },
+    {
+      "code": "33",
+      "name": "조경수 규격미달",
+      "judgmentArticle": "제33조",
+      "investigationArticle": "제70조",
+      "repairCostArticle": "제113조",
+      "warrantyCategoryCode": "8",
+      "phenomenonTags": [],
+      "plainExplanation": "나무 종류는 맞게 심었지만 크기(흉고직경·근원직경·수고)가 설계 기준에 못 미치면 하자입니다 — 다만 10%까지는 봐줍니다. 나무 상태가 워낙 우량하거나 주변과 잘 어울리면 예외적으로 하자가 아닐 수 있습니다."
+    },
+    {
+      "code": "34",
+      "name": "도배",
+      "judgmentArticle": "제34조",
+      "investigationArticle": "제71조",
+      "repairCostArticle": "제114조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [
+        "들뜸및탈락"
+      ],
+      "plainExplanation": "도배지나 시트지가 들뜨거나 주름지거나 이음매가 벌어져서 보기 안 좋으면 하자입니다. 다만 봉투바름(도배 시공 방식 중 하나) 특성으로 생기는 들뜸처럼, 시공 방식 자체의 특성으로 어쩔 수 없이 나타나는 현상은 하자가 아닙니다."
+    },
+    {
+      "code": "35",
+      "name": "바닥구조",
+      "judgmentArticle": "제35조",
+      "investigationArticle": "제72조",
+      "repairCostArticle": "제115조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [
+        "들뜸및탈락"
+      ],
+      "plainExplanation": "바닥재가 깨지거나 들뜨거나 삐걱거리거나 벌어지거나 단차가 생기거나 솟아올라서 안전·기능·미관에 문제가 생기면 하자입니다. 여기에 더해 사업계획승인을 받은 아파트는 바닥 구성층 두께가 설계보다 얇거나, 층간소음을 줄이는 측면 완충재가 빠지거나 위치가 잘못됐거나, 재료 품질이 기준에 못 미치면 그 자체로 하자로 봅니다."
+    },
+    {
+      "code": "36",
+      "name": "석재",
+      "judgmentArticle": "제36조",
+      "investigationArticle": "제73조",
+      "repairCostArticle": "제116조",
+      "warrantyCategoryCode": "1",
+      "warrantyCategoryNote": "건물내부 석공사(마감공사,1) 기준. 건물외부 석공사는 조적공사(5년,19)로 별도 분류됨",
+      "phenomenonTags": [
+        "균열",
+        "들뜸및탈락",
+        "오염및변색"
+      ],
+      "plainExplanation": "돌(석재)을 설계와 다른 규격이나 방법으로 붙였거나, 돌이나 그 사이를 메우는 실링재에 탈락·처짐·파손·균열·단차·오염·백화(흰 얼룩) 같은 문제가 생겨 안전·기능·미관에 지장이 있으면 하자입니다."
+    },
+    {
+      "code": "37",
+      "name": "가구",
+      "judgmentArticle": "제37조",
+      "investigationArticle": "제74조",
+      "repairCostArticle": "제117조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [
+        "들뜸및탈락"
+      ],
+      "plainExplanation": "시공사가 설치한 주방가구·수납가구가 깨지거나 들뜨거나 수직·수평이 안 맞거나 고정이 안 돼 떨어질 위험이 있거나 여닫이가 안 되거나 이음매 처리가 엉성해서 안전·기능·미관에 문제가 있으면 하자입니다."
+    },
+    {
+      "code": "38",
+      "name": "보온재",
+      "judgmentArticle": "제38조",
+      "investigationArticle": "제75조",
+      "repairCostArticle": "제118조",
+      "warrantyCategoryCode": "3",
+      "phenomenonTags": [],
+      "plainExplanation": "배관이나 덕트를 감싸는 보온재를 설계와 다르게 빠뜨리거나 줄여서 시공했거나, 그것 때문에 동파가 나면 하자입니다. 다만 관련 기준에 맞는 보온 조치를 했거나 열선 같은 별도 동파 방지 장치가 제대로 작동한다면 하자가 아닙니다."
+    },
+    {
+      "code": "39",
+      "name": "가전기기",
+      "judgmentArticle": "제39조",
+      "investigationArticle": "제76조",
+      "repairCostArticle": "제119조",
+      "warrantyCategoryCode": "1",
+      "phenomenonTags": [
+        "기능불량"
+      ],
+      "plainExplanation": "시공사가 설치하기로 한 가전기기가 아예 안 달렸거나(미시공), 다른 걸로 바뀌었거나(변경시공), 파손·흠집·찌그러짐 등 시공 불량이 있거나, 작동이 안 되거나 고정이 부실하면 하자입니다. 견본주택이나 분양책자에 나온 가전이 설계·시공 오류로 그 자리에 안 들어가거나 들어가도 작동이 안 되면 이것도 하자입니다."
+    },
+    {
+      "code": "40",
+      "name": "승강기",
+      "judgmentArticle": "제40조",
+      "investigationArticle": "제77조",
+      "repairCostArticle": "제120조",
+      "warrantyCategoryCode": "9",
+      "phenomenonTags": [
+        "기능불량"
+      ],
+      "plainExplanation": "승강기 버튼이나 호출 기능, 비상통화장치가 작동을 안 하거나, 승강기와 승강장 사이 틈이 너무 크거나 수평이 안 맞으면 하자입니다. 내부 마감재가 파손되거나 탈락하거나 고정이 부실해도 하자고, 법정 안전검사에서 발견된 문제가 시공 잘못 때문이라면 그것도 하자입니다."
+    },
+    {
+      "code": "41",
+      "name": "보도·차도",
+      "judgmentArticle": "제41조",
+      "investigationArticle": "제78조",
+      "repairCostArticle": "제121조",
+      "warrantyCategoryCode": "16",
+      "phenomenonTags": [],
+      "plainExplanation": "단지 안 보도나 차도의 포장재·경계석이 설계와 다르게 시공됐거나, 깨지거나 솟아오르거나 가라앉거나 물이 심하게 고이면 하자입니다."
+    },
+    {
+      "code": "42",
+      "name": "지하주차장",
+      "judgmentArticle": "제42조",
+      "investigationArticle": "제79조",
+      "repairCostArticle": "제122조",
+      "warrantyCategoryCode": "16",
+      "warrantyCategoryNote": "바닥·벽면 마감재는 별표3(지하주차장 하자 공종범위) 참고 — 복수 공종 해당 가능",
+      "phenomenonTags": [],
+      "plainExplanation": "주차·주행로 폭이 설계보다 좁으면 하자입니다. 기둥·모서리 보호대(코너가드)나 안전페인트가 빠지거나 탈락·고정불량이면 하자고, 램프 연석(경사로 경계석) 크기가 기준 미달이거나 미시공·파손이어도 하자입니다. 천장·벽면 뿜칠이나 바닥 에폭시 같은 마감재가 미시공되거나 두께·재질이 바뀌거나 탈락·벗겨졌어도 하자로 봅니다."
+    },
+    {
+      "code": "43",
+      "name": "옹벽",
+      "judgmentArticle": "제43조",
+      "investigationArticle": "제80조",
+      "repairCostArticle": "제123조",
+      "warrantyCategoryCode": "16",
+      "warrantyCategoryNote": "토목옹벽(대지조성공사,16) 기준. 건축옹벽은 철근콘크리트공사(5년,17)로 별도 분류됨",
+      "phenomenonTags": [],
+      "plainExplanation": "옹벽에 균열이 가거나 파손·침하가 있거나, 원래 설계된 선형과 어긋나거나, 배수구 상태가 나빠서 안전·기능에 문제가 생기면 하자입니다."
+    },
+    {
+      "code": "44",
+      "name": "재해로 인한 피해",
+      "judgmentArticle": "제44조",
+      "investigationArticle": "제81조",
+      "repairCostArticle": "제124조",
+      "warrantyCategoryCode": null,
+      "phenomenonTags": [],
+      "plainExplanation": "태풍·호우·지진·폭설 같은 자연재해로 어쩔 수 없이 생긴 피해는 하자가 아닙니다. 자연재해가 아닌 다른 원인으로 생긴 피해는 그 원인을 따져서 하자 여부를 정합니다. 다만 건물의 구조·설비 안전 수준이 원래도 기준에 크게 못 미쳐서 그 부분 때문에 피해가 커졌다면, 자연재해 상황이라도 그 부분은 시공하자로 볼 수 있습니다."
+    }
+  ],
+  "phenomena": {
+    "note": "국토일보 보도(2026-03) 기준 하자심사분쟁조정위원회 통계(2021~2026.2 누적 10,911건 접수, 68.3% 하자 판정). 이건 조문별 분류가 아니라 하자 '현상'별 분류라서 여러 조문에 걸쳐 나타난다 — 아래 phenomenonTags로 역참조.",
+    "source": "https://www.ikld.kr/news/articleView.html?idxno=224338 (국토일보, 2026-03)",
+    "ranking": [
+      {
+        "rank": 1,
+        "name": "기능불량",
+        "share": 0.18
+      },
+      {
+        "rank": 2,
+        "name": "들뜸및탈락",
+        "share": 0.151
+      },
+      {
+        "rank": 3,
+        "name": "균열",
+        "share": 0.111
+      },
+      {
+        "rank": 4,
+        "name": "결로",
+        "share": 0.099
+      },
+      {
+        "rank": 5,
+        "name": "누수",
+        "share": 0.076
+      },
+      {
+        "rank": 6,
+        "name": "오염및변색",
+        "share": 0.068
+      }
+    ]
+  }
+}

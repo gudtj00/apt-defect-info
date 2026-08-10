@@ -1,0 +1,41 @@
+{
+  "name": "apt-defect-info",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "아파트 하자 정보 서비스 — 단지별 담보책임기간 계산기 · 하자 유형 사전 · 건설사 하자 판정 명단",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start",
+    "lint:legal": "node scripts/legal-lint.mjs",
+    "test:legal": "node scripts/legal-lint.test.mjs",
+    "test:warranty": "node lib/warranty-calc.test.ts",
+    "test": "npm run test:legal && npm run test:warranty",
+    "db:push": "drizzle-kit push",
+    "ingest:complexes": "node pipeline/ingest_complexes.mjs"
+  },
+  "dependencies": {
+    "aromanize": "^0.1.5",
+    "better-sqlite3": "^13.0.2",
+    "drizzle-orm": "^0.45.2",
+    "gray-matter": "^4.0.3",
+    "next": "^16.2.10",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.12",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}
