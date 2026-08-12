@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db/client";
 import { complexes } from "@/lib/db/schema";
@@ -73,6 +74,7 @@ export default async function ComplexPage({
   if (!complex) notFound();
 
   const result = calculateWarranty(complex.usedate, undefined, handoverDate);
+  const anyClaimable = result.ok && result.items.some((i) => i.status !== "expired");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -239,6 +241,42 @@ export default async function ComplexPage({
           )}
         </>
       )}
+
+      {/* 결과만 보여주고 끝내면 "그래서 뭘 해야 하나"에서 이탈한다 — 다음 행동으로 잇는다. */}
+      <div
+        style={{
+          marginTop: "2rem",
+          padding: "1.25rem",
+          background: anyClaimable ? "#ecfdf5" : "#f8fafc",
+          border: `1px solid ${anyClaimable ? "#a7f3d0" : "#e2e8f0"}`,
+          borderRadius: 12,
+        }}
+      >
+        <strong style={{ display: "block", fontSize: "1rem", color: anyClaimable ? "#065f46" : "#0f172a" }}>
+          {anyClaimable ? "아직 청구할 수 있는 공종이 있습니다" : "그래서 이제 무엇을 할 수 있나요?"}
+        </strong>
+        <p style={{ margin: "0.5rem 0 0", fontSize: "0.9rem", lineHeight: 1.7, color: "#475569" }}>
+          {anyClaimable
+            ? "누구에게 어떻게 청구하는지, 시공사가 15일 안에 어떤 답을 해야 하는지, 응하지 않으면 무엇을 할 수 있는지 절차를 정리해 두었습니다."
+            : "담보책임기간이 지나도 선택지가 남아 있는 경우가 있습니다. 청구 절차와 분쟁조정 경로를 확인해 보세요."}
+        </p>
+        <Link
+          href="/claim"
+          style={{
+            display: "inline-block",
+            marginTop: "0.75rem",
+            padding: "0.55rem 1rem",
+            borderRadius: 999,
+            background: "#059669",
+            color: "#fff",
+            fontSize: "0.875rem",
+            fontWeight: 600,
+            textDecoration: "none",
+          }}
+        >
+          하자보수 청구 절차 보기
+        </Link>
+      </div>
 
       <p style={{ fontSize: "0.8rem", color: "#888", marginTop: "1.5rem" }}>{CALC_DISCLAIMER}</p>
     </div>

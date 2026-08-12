@@ -53,6 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/defect" className="hidden text-slate-600 no-underline hover:text-emerald-600 sm:inline">
                 하자 유형 검색
               </Link>
+              <Link href="/claim" className="hidden text-slate-600 no-underline hover:text-emerald-600 sm:inline">
+                청구 절차
+              </Link>
               <Link href="/faq" className="hidden text-slate-600 no-underline hover:text-emerald-600 sm:inline">
                 자주 묻는 질문
               </Link>
