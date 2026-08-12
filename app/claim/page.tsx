@@ -1,9 +1,10 @@
 import Link from "next/link";
+import ClaimLetter from "./ClaimLetter";
 
 export const metadata = {
-  title: "하자보수 청구 절차 — 하잡",
+  title: "하자보수 청구 절차와 청구서 양식 — 하잡",
   description:
-    "하자를 발견했다면 누구에게, 어떻게 청구하고, 시공사가 응하지 않으면 무엇을 할 수 있는지 공동주택관리법 규정에 따라 단계별로 정리했습니다.",
+    "하자를 발견했다면 누구에게, 어떻게 청구하고, 시공사가 응하지 않으면 무엇을 할 수 있는지 공동주택관리법 규정에 따라 단계별로 정리했습니다. 값만 채우면 완성되는 하자보수 청구서 양식도 함께 제공합니다.",
 };
 
 /** 법령 근거를 본문 옆에 작게 붙인다 — 어디서 나온 규정인지 추적 가능하게. */
@@ -116,16 +117,7 @@ export default function ClaimPage() {
             법이 청구 방식을 특정하고 있지는 않지만, 다음 단계의 15일이 언제부터 시작됐는지 다투지 않으려면
             서면으로 남기고 보낸 기록을 보관하는 편이 안전합니다.
           </p>
-          <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-            <p className="text-xs font-semibold text-slate-500">청구서에 들어가면 좋은 내용</p>
-            <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-600">
-              <li>단지명·동·호수, 청구인 이름과 연락처</li>
-              <li>하자 부위와 상태 (사진 첨부)</li>
-              <li>하자를 발견한 날짜</li>
-              <li>보수를 요청한다는 의사 표시</li>
-              <li>회신받을 주소·연락처</li>
-            </ul>
-          </div>
+          <ClaimLetter />
         </Step>
 
         <Step no={4} title="15일 안에 시공사가 답해야 합니다" cite="시행령 제38조제3항·제4항">
