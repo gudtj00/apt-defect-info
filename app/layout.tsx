@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-slate-50 text-slate-900 antialiased">
         <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
-            <Link href="/" className="flex items-center gap-2 text-[1.05rem] font-extrabold tracking-tight text-slate-900 no-underline">
+            <Link href="/" className="flex shrink-0 items-center gap-2 text-[1.05rem] font-extrabold tracking-tight text-slate-900 no-underline">
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
                   <path
@@ -49,27 +49,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="text-[0.65rem] font-semibold tracking-wide text-slate-400">HAJAPT</span>
               </span>
             </Link>
-            <div className="flex items-center gap-6 text-sm">
-              <Link href="/defect" className="hidden text-slate-600 no-underline hover:text-emerald-600 sm:inline">
+            {/* 좁은 화면에서는 5개가 한 줄에 안 들어가므로 가로 스크롤로 둔다 —
+                버튼 스타일을 걷어내면서 모바일에서 메뉴가 아예 사라지지 않게 하기 위함. */}
+            <div className="flex items-center gap-4 overflow-x-auto text-sm sm:gap-6">
+              <Link
+                href="/"
+                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
+              >
+                담보책임기간 계산기
+              </Link>
+              <Link
+                href="/defect"
+                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
+              >
                 하자 유형 검색
               </Link>
-              <Link href="/claim" className="hidden text-slate-600 no-underline hover:text-emerald-600 sm:inline">
+              <Link
+                href="/claim"
+                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
+              >
                 청구 절차
               </Link>
-              <Link href="/faq" className="hidden text-slate-600 no-underline hover:text-emerald-600 sm:inline">
+              <Link
+                href="/faq"
+                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
+              >
                 자주 묻는 질문
               </Link>
               <Link
                 href="/defect/articles"
-                className="hidden rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-slate-800 md:inline"
+                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
               >
                 전체 조문 목록
-              </Link>
-              <Link
-                href="/"
-                className="rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-emerald-700"
-              >
-                담보책임기간 계산기
               </Link>
             </div>
           </div>
