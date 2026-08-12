@@ -5,6 +5,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "하잡 — 담보책임기간 계산기",
   description: "우리 아파트, 아직 하자보수 무상 청구가 가능한지 공종별로 확인하세요.",
+  // Google Search Console 소유권 확인용. 확인이 끝나도 지우면 소유권이 풀리므로 유지한다.
+  verification: {
+    google: "KffZKk8iXI3worp9hcwx-gQDK8thqIWA_t9p22e62P0",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
