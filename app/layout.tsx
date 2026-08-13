@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body className="min-h-screen bg-slate-50 text-slate-900 antialiased">
         <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
-          <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
+          <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3">
             <Link href="/" className="flex shrink-0 items-center gap-2 text-[1.05rem] font-extrabold tracking-tight text-slate-900 no-underline">
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
@@ -49,6 +49,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="text-[0.65rem] font-semibold tracking-wide text-slate-400">HAJAPT</span>
               </span>
             </Link>
+            {/* 헤더 검색 — 자바스크립트 없이 동작하도록 평범한 GET 폼으로 둔다.
+                홈에 큰 검색창이 따로 있으므로 좁은 화면에서는 숨긴다. */}
+            <form action="/" method="get" className="hidden min-w-0 flex-1 lg:block">
+              <div className="relative">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                  type="search"
+                  name="q"
+                  placeholder="단지명으로 검색…"
+                  aria-label="단지명 검색"
+                  className="w-full rounded-full border border-slate-200 bg-slate-50 py-2 pl-9 pr-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-400"
+                />
+              </div>
+            </form>
+
             {/* 좁은 화면에서는 5개가 한 줄에 안 들어가므로 가로 스크롤로 둔다 —
                 버튼 스타일을 걷어내면서 모바일에서 메뉴가 아예 사라지지 않게 하기 위함. */}
             <div className="flex items-center gap-4 overflow-x-auto text-sm sm:gap-6">

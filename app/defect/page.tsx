@@ -6,6 +6,7 @@ import {
   PHENOMENON_SLUG,
 } from "@/lib/defects";
 import DefectSearch from "./DefectSearch";
+import { Badge, Hero } from "../_components/ui";
 
 export const metadata = {
   title: "하자 유형 검색 — 하잡",
@@ -18,13 +19,12 @@ export default function DefectIndexPage() {
 
   return (
     <div>
-      <div className="py-8 text-center">
-        <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">하자 유형 검색</h1>
-        <p className="mx-auto mt-3 max-w-lg px-5 text-slate-600">
-          우리 집 증상을 입력하면 관련된 하자판정기준 조문을 찾아드립니다. 하자 여부를 판정하는 게 아니라,
-          관련 있을 만한 기준을 안내하는 정보매칭 서비스입니다.
-        </p>
-      </div>
+      <Hero
+        badge={<Badge>공동주택 하자판정기준 38개 조문</Badge>}
+        title="내 집 증상,"
+        accent="어떤 하자에 해당할까?"
+        description="증상을 입력하면 관련된 하자판정기준 조문을 찾아드립니다. 하자 여부를 판정하는 것이 아니라, 관련 있을 만한 기준을 안내하는 정보매칭 서비스입니다."
+      />
 
       {/* 화면 전체 너비 2단 섹션 — 왼쪽 현상별로 찾아보기 / 오른쪽 위(증상으로 찾기)-아래(조문으로 찾기) */}
       <section className="grid w-full md:grid-cols-2">

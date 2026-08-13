@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { defectTypes, defectSource, getWarrantyCategory, getNamedSlugForCode } from "@/lib/defects";
+import { Badge, Hero } from "../../_components/ui";
 
 export const metadata = {
   title: "조문별 전체 목록 — 하자 유형 검색",
@@ -8,8 +9,16 @@ export const metadata = {
 
 export default function DefectArticlesPage() {
   return (
-    <div className="mx-auto max-w-3xl px-5 py-8">
-      <nav className="mb-8 flex gap-2 text-sm">
+    <div>
+      <Hero
+        badge={<Badge>국토교통부 고시 제7조~제44조</Badge>}
+        title="하자판정기준"
+        accent="38개 조문 전체"
+        description="공동주택 하자의 조사, 보수비용 산정 및 하자판정기준 고시의 판정 조문 전체입니다. 담보책임기간은 공용부분 기준이며, 우리 아파트 잔여 기간은 계산기에서 확인하세요."
+      />
+
+      <div className="mx-auto max-w-3xl px-5 py-10">
+      <nav className="mb-6 flex gap-2 text-sm">
         <Link
           href="/defect"
           className="rounded-full px-4 py-1.5 font-semibold text-slate-500 no-underline hover:bg-white hover:text-emerald-600"
@@ -19,16 +28,11 @@ export default function DefectArticlesPage() {
         <span className="rounded-full bg-emerald-600 px-4 py-1.5 font-semibold text-white">전체 조문 목록</span>
       </nav>
 
-      <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">조문별 전체 목록 (38개)</h1>
-      <p className="mt-2 text-slate-600">
-        국토교통부 고시 「공동주택 하자의 조사, 보수비용 산정 및 하자판정기준」 제7조~제44조 판정 조문 전체입니다.
-        담보책임기간은 공용부분 기준이며, 정확한 우리 아파트 잔여 기간은 단지별 계산기에서 확인하세요.
-      </p>
-      <p className="mt-2 text-xs text-slate-400">
+      <p className="mb-4 text-xs text-slate-400">
         기준: {defectSource.notice} · 확인일 {defectSource.verifiedAt}
       </p>
 
-      <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50 text-left">
@@ -63,6 +67,7 @@ export default function DefectArticlesPage() {
         이 페이지가 제공하는 정보는 참고용이며 법률 자문이 아닙니다. 실제 하자 여부 판정은 하자심사·분쟁조정위원회
         또는 전문가 확인이 필요합니다.
       </p>
+      </div>
     </div>
   );
 }

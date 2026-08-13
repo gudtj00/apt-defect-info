@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Badge, Hero } from "../_components/ui";
 
 export const metadata = {
   title: "자주 묻는 질문 — 하잡",
@@ -146,12 +147,17 @@ const jsonLd = {
 
 export default function FaqPage() {
   return (
-    <div className="mx-auto max-w-2xl px-5 py-8">
+    <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">자주 묻는 질문</h1>
-      <p className="mt-2 text-slate-600">담보책임기간 계산과 하자 판정에 관해 자주 나오는 질문 10가지입니다.</p>
+      <Hero
+        badge={<Badge>핵심 질문 {FAQ_ITEMS.length}가지</Badge>}
+        title="궁금한 점을"
+        accent="먼저 확인해 보세요"
+        description="담보책임기간 계산과 하자 판정에 관해 자주 나오는 질문을 모았습니다."
+      />
 
-      <div className="mt-6 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="mx-auto max-w-2xl px-5 py-10">
+      <div className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white shadow-sm">
         {FAQ_ITEMS.map((item, i) => (
           <details key={i} className="group px-5 py-4 open:bg-slate-50">
             <summary className="flex cursor-pointer list-none items-start gap-3 font-semibold text-slate-900 marker:content-none">
@@ -168,6 +174,7 @@ export default function FaqPage() {
         이 페이지가 제공하는 정보는 참고용이며 법률 자문이 아닙니다. 실제 하자 여부 판정은 하자심사·분쟁조정위원회
         또는 전문가 확인이 필요합니다.
       </p>
+      </div>
     </div>
   );
 }

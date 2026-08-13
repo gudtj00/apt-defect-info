@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ClaimLetter from "./ClaimLetter";
+import { Badge, Hero } from "../_components/ui";
 
 export const metadata = {
   title: "하자보수 청구 절차와 청구서 양식 — 하잡",
@@ -38,14 +39,16 @@ function Step({
 
 export default function ClaimPage() {
   return (
-    <div className="mx-auto max-w-2xl px-5 py-8">
-      <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">하자보수 청구 절차</h1>
-      <p className="mt-2 text-slate-600">
-        하자를 발견했다면 어디서부터 시작해야 하는지, 시공사가 응하지 않으면 무엇을 할 수 있는지 순서대로
-        정리했습니다. 아래 내용은 모두 공동주택관리법과 같은 법 시행령에 정해진 절차입니다.
-      </p>
+    <div>
+      <Hero
+        badge={<Badge>공동주택관리법 제37조 · 시행령 제38조</Badge>}
+        title="하자를 발견했다면"
+        accent="이 순서로 청구하세요"
+        description="누구에게 어떻게 청구하는지, 시공사는 언제까지 답해야 하는지, 응하지 않으면 무엇을 할 수 있는지 정리했습니다."
+      />
 
-      <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
+      <div className="mx-auto max-w-2xl px-5 py-10">
+      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
         <p className="text-sm leading-7 text-emerald-900">
           <strong className="font-bold">먼저 확인할 것 — 담보책임기간이 남아 있나요?</strong>
           <br />
@@ -235,6 +238,7 @@ export default function ClaimPage() {
         개별 사안에 따라 적용이 달라질 수 있고, 하자 여부 판정은 하자심사·분쟁조정위원회 또는 전문가 확인이
         필요합니다.
       </p>
+      </div>
     </div>
   );
 }
