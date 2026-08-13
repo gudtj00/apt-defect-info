@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import NavLinks from "./_components/NavLinks";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -74,40 +75,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </form>
 
-            {/* 좁은 화면에서는 5개가 한 줄에 안 들어가므로 가로 스크롤로 둔다 —
-                버튼 스타일을 걷어내면서 모바일에서 메뉴가 아예 사라지지 않게 하기 위함. */}
-            <div className="flex items-center gap-4 overflow-x-auto text-sm sm:gap-6">
-              <Link
-                href="/"
-                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
-              >
-                담보책임기간 계산기
-              </Link>
-              <Link
-                href="/defect"
-                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
-              >
-                하자 유형 검색
-              </Link>
-              <Link
-                href="/claim"
-                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
-              >
-                청구 절차
-              </Link>
-              <Link
-                href="/faq"
-                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
-              >
-                자주 묻는 질문
-              </Link>
-              <Link
-                href="/defect/articles"
-                className="shrink-0 whitespace-nowrap text-slate-600 no-underline hover:text-emerald-600"
-              >
-                전체 조문 목록
-              </Link>
-            </div>
+            {/* 현재 탭 표시가 필요해 클라이언트 컴포넌트로 분리했다 (usePathname). */}
+            <NavLinks />
           </div>
         </nav>
         <main>{children}</main>
