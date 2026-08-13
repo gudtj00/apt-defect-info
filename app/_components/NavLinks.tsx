@@ -13,9 +13,14 @@ import { usePathname } from "next/navigation";
 const NAV: { href: string; label: string; isActive: (path: string) => boolean }[] = [
   {
     href: "/",
+    label: "홈",
+    isActive: (p) => p === "/",
+  },
+  {
+    href: "/calculator",
     label: "담보책임기간 계산기",
     // 단지 상세(/apt/...)는 계산기에서 이어지는 화면이므로 같은 탭으로 본다.
-    isActive: (p) => p === "/" || p.startsWith("/apt"),
+    isActive: (p) => p.startsWith("/calculator") || p.startsWith("/apt"),
   },
   {
     href: "/defect",

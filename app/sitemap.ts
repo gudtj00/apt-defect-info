@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
+    { url: `${SITE_URL}/calculator`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/claim`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/faq`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/defect`, changeFrequency: "monthly", priority: 0.8 },

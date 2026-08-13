@@ -69,7 +69,8 @@ export default function HomeSearchBox({ defaultValue }: { defaultValue: string }
 
   return (
     <div ref={wrapperRef} className="relative">
-      <form method="get" action="/" className="flex gap-2 rounded-full bg-slate-50 p-1.5 ring-1 ring-slate-200">
+      {/* 검색 결과는 /calculator가 받는다 — 홈은 소개 페이지로 분리했다. */}
+      <form method="get" action="/calculator" className="flex gap-2 rounded-full bg-slate-50 p-1.5 ring-1 ring-slate-200">
         <input
           type="text"
           name="q"

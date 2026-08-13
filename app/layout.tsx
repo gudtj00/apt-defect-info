@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             {/* 헤더 검색 — 자바스크립트 없이 동작하도록 평범한 GET 폼으로 둔다.
                 홈에 큰 검색창이 따로 있으므로 좁은 화면에서는 숨긴다. */}
-            <form action="/" method="get" className="hidden min-w-0 flex-1 lg:block">
+            <form action="/calculator" method="get" className="hidden min-w-0 flex-1 lg:block">
               <div className="relative">
                 <svg
                   viewBox="0 0 24 24"
