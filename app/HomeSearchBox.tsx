@@ -6,7 +6,14 @@ import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
 type Suggestion = { slug: string; name: string; address: string };
 
-export default function HomeSearchBox({ defaultValue }: { defaultValue: string }) {
+export default function HomeSearchBox({
+  defaultValue,
+  region,
+}: {
+  defaultValue: string;
+  /** 지도에서 지역을 골랐다면 자동완성과 폼 제출 모두 그 안으로 좁힌다. */
+  region?: string;
+}) {
   const router = useRouter();
   const [query, setQuery] = useState(defaultValue);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -22,7 +29,8 @@ export default function HomeSearchBox({ defaultValue }: { defaultValue: string }
       return;
     }
     const timer = setTimeout(() => {
-      fetch(`/api/apt-suggest?q=${encodeURIComponent(trimmed)}`)
+      const params = new URLSearchParams({ q: trimmed, ...(region ? { region } : {}) });
+      fetch(`/api/apt-suggest?${params}`)
         .then((r) => r.json())
         .then((data: Suggestion[]) => {
           setSuggestions(data);
@@ -35,7 +43,7 @@ export default function HomeSearchBox({ defaultValue }: { defaultValue: string }
         });
     }, 200);
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [query, region]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -72,6 +80,8 @@ export default function HomeSearchBox({ defaultValue }: { defaultValue: string }
     <div ref={wrapperRef} className="relative">
       {/* 검색 결과는 /calculator가 받는다. 홈은 소개 페이지로 분리했다. */}
       <form method="get" action="/calculator">
+        {/* 자바스크립트 없이 폼을 그냥 제출해도 고른 지역이 유지되게 한다. */}
+        {region ? <input type="hidden" name="region" value={region} /> : null}
         {/* 입력란의 이름을 placeholder로만 알리면 글자를 넣는 순간 사라진다. 라벨을 따로 둔다. */}
         <label htmlFor="apt-q" className="mb-2 block text-sm font-semibold text-ink">
           단지명

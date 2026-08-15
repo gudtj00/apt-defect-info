@@ -178,6 +178,92 @@ body {
 }
 
 /* ==========================================================================
+   시도 지도 선택기 (RegionMap)
+   --------------------------------------------------------------------------
+   도형이 많아서 유틸리티 클래스를 도형마다 붙이면 마크업이 읽히지 않는다.
+   이 컴포넌트만 CSS로 뺐다. 색은 그대로 토큰을 쓴다.
+   ========================================================================== */
+
+.region-map {
+  /* 도형별 변형이 자기 자리에서 일어나게 한다. 이게 없으면 SVG 원점 기준으로
+     움직여서 지방 도형이 화면 밖으로 튄다. */
+  overflow: visible;
+}
+
+.region-path {
+  fill: var(--c-inset);
+  /* 면 색만으로는 배경과 1.05:1까지밖에 안 벌어져서 아무것도 안 고른 상태의
+     지도가 보이지 않았다. 형태는 윤곽선이 책임진다(흰 배경 대비 4.9:1).
+     non-scaling-stroke를 줘서 지도를 키우든 줄이든 선 굵기가 1px로 유지된다. */
+  stroke: var(--c-ink-3);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    fill 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.region-path:hover {
+  fill: var(--c-accent-soft);
+  stroke: var(--c-accent);
+  transform: translateY(-3px) scale(1.015);
+}
+
+.region-path.is-selected {
+  fill: var(--c-accent);
+  stroke: var(--c-accent-hover);
+  transform: translateY(-3px) scale(1.015);
+}
+
+/* 하나를 고르면 나머지는 뒤로 물린다. 지금 무엇이 걸려 있는지 한눈에 보이게. */
+.region-path.is-muted {
+  opacity: 0.45;
+}
+.region-path.is-muted:hover {
+  opacity: 1;
+}
+
+.region-label text {
+  fill: var(--c-ink);
+  font-size: 34px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: var(--c-surface);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 진입 연출에서 투명도는 건드리지 않는다.
+     애니메이션이 진행되지 않는 환경이 실제로 있었고(도형 16개가 opacity 0으로 남았다),
+     그때 지도가 통째로 사라졌다. 위치만 움직이면 연출이 멈춰도 지도는 늘 보인다.
+     최악의 경우 10px 내려앉은 채로 그려질 뿐이다. */
+  .region-path {
+    animation: region-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+  .region-label {
+    animation: region-label-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes region-in {
+    from {
+      transform: translateY(10px) scale(0.97);
+    }
+  }
+  @keyframes region-label-in {
+    from {
+      transform: translateY(4px);
+    }
+  }
+}
+
+/* ==========================================================================
    법령 본문 마크다운
    조문 원문·해설이 렌더되는 영역. 위 토큰을 그대로 따라간다.
    ========================================================================== */

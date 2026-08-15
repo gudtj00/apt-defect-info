@@ -80,7 +80,7 @@ export default function ClaimPage() {
           자동 배치에 맡기면 순서가 뒤집힌다.
         */}
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-start lg:gap-14">
-          <section className="lg:col-start-1 lg:row-start-1">
+          <section className="min-w-0 lg:col-start-1 lg:row-start-1">
             <h2 className="text-xl font-bold tracking-tight text-ink">청구 절차</h2>
             <p className="mt-1.5 text-sm leading-7 text-ink-2">
               공동주택관리법과 같은 법 시행령이 정한 순서입니다.
@@ -235,7 +235,7 @@ export default function ClaimPage() {
           {/* 오른쪽 단: 쓰는 쪽 */}
           <section
             id="claim-letter"
-            className="scroll-mt-24 lg:col-start-2 lg:row-start-1 lg:row-span-2"
+            className="min-w-0 scroll-mt-24 lg:col-start-2 lg:row-start-1 lg:row-span-2"
           >
             <h2 className="text-xl font-bold tracking-tight text-ink">청구서 만들기</h2>
             <p className="mt-1.5 text-sm leading-7 text-ink-2">
