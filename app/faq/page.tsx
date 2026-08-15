@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Badge, Hero } from "../_components/ui";
+import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
+import { Badge, Hero, FootNote } from "../_components/ui";
 
 export const metadata = {
-  title: "자주 묻는 질문 — 하잡",
+  title: "자주 묻는 질문 | 하잡",
   description: "담보책임기간 계산과 하자 판정에 관해 자주 묻는 질문 10가지를 정리했습니다.",
 };
 
@@ -38,7 +39,7 @@ const FAQ_ITEMS: FaqItem[] = [
       <>
         공개된 단지 데이터에는 사용승인일만 있고, 세대별 실제 인도일은 없습니다. 그래서 부득이 사용승인일로 대신
         추정해서 보여드립니다. 단지 상세 페이지에서 실제 인도일을 직접 입력하면 추정치 대신 확정값으로 계산해
-        드립니다 — 날짜를 어떻게 확인하는지는 그 입력란 아래 설명을 참고하세요.
+        드립니다. 날짜를 어떻게 확인하는지는 그 입력란 아래 설명을 참고하세요.
       </>
     ),
     aText:
@@ -62,12 +63,12 @@ const FAQ_ITEMS: FaqItem[] = [
     a: (
       <>
         원칙적으로는 기간 내에 청구해야 하지만, <strong>2016년 8월 11일 이전에 사용검사를 받은 공동주택</strong>은
-        예외가 있습니다 — 담보책임기간 내에 하자가 발생한 사실만 입증되면 청구할 수 있도록 구제하는 규정입니다
+        예외가 있습니다. 담보책임기간 내에 하자가 발생한 사실만 입증되면 청구할 수 있도록 구제하는 규정입니다
         (하자판정기준 고시 제127조). 오래된 단지라면 이 예외에 해당하는지 확인해볼 가치가 있습니다.
       </>
     ),
     aText:
-      "원칙적으로는 기간 내에 청구해야 하지만, 2016년 8월 11일 이전에 사용검사를 받은 공동주택은 예외가 있습니다 — 담보책임기간 내에 하자가 발생한 사실만 입증되면 청구할 수 있도록 구제하는 규정입니다(하자판정기준 고시 제127조). 오래된 단지라면 이 예외에 해당하는지 확인해볼 가치가 있습니다.",
+      "원칙적으로는 기간 내에 청구해야 하지만, 2016년 8월 11일 이전에 사용검사를 받은 공동주택은 예외가 있습니다. 담보책임기간 내에 하자가 발생한 사실만 입증되면 청구할 수 있도록 구제하는 규정입니다(하자판정기준 고시 제127조). 오래된 단지라면 이 예외에 해당하는지 확인해볼 가치가 있습니다.",
   },
   {
     q: "하자인지 아닌지는 누가, 어떻게 판단하나요?",
@@ -75,7 +76,7 @@ const FAQ_ITEMS: FaqItem[] = [
       <>
         국토교통부 고시 「공동주택 하자의 조사, 보수비용 산정 및 하자판정기준」이 정한 객관적 기준으로 판단합니다.
         실제 분쟁이 생기면 국토안전관리원 산하 하자심사·분쟁조정위원회가 심사·조정합니다. 이 사이트의{" "}
-        <Link href="/defect" className="text-emerald-600 underline">
+        <Link href="/defect" className="text-accent underline">
           하자 유형 검색
         </Link>
         은 그 판정기준을 미리 찾아볼 수 있게 도와주는 참고 자료이지, 하자 여부를 최종 판정하는 기관이 아닙니다.
@@ -122,16 +123,16 @@ const FAQ_ITEMS: FaqItem[] = [
     q: "하자 유형 검색의 증상 검색은 어떻게 쓰나요?",
     a: (
       <>
-        <Link href="/defect" className="text-emerald-600 underline">
+        <Link href="/defect" className="text-accent underline">
           하자 유형 검색
         </Link>{" "}
-        페이지 검색창에 "벽지 들뜸", "물이 새요"처럼 겪고 있는 증상을 입력하면 관련 있을 만한 판정기준 조문을
+        페이지 검색창에 &ldquo;벽지 들뜸&rdquo;, &ldquo;물이 새요&rdquo;처럼 겪고 있는 증상을 입력하면 관련 있을 만한 판정기준 조문을
         찾아드립니다. 이건 하자 여부를 판정하는 게 아니라 관련 조문을 안내하는 정보매칭 기능이라는 점을
-        참고해주세요 — 최종 판단은 전문가 확인이 필요합니다.
+        참고해주세요. 최종 판단은 전문가 확인이 필요합니다.
       </>
     ),
     aText:
-      "하자 유형 검색 페이지 검색창에 '벽지 들뜸', '물이 새요'처럼 겪고 있는 증상을 입력하면 관련 있을 만한 판정기준 조문을 찾아드립니다. 이건 하자 여부를 판정하는 게 아니라 관련 조문을 안내하는 정보매칭 기능이라는 점을 참고해주세요 — 최종 판단은 전문가 확인이 필요합니다.",
+      "하자 유형 검색 페이지 검색창에 '벽지 들뜸', '물이 새요'처럼 겪고 있는 증상을 입력하면 관련 있을 만한 판정기준 조문을 찾아드립니다. 이건 하자 여부를 판정하는 게 아니라 관련 조문을 안내하는 정보매칭 기능이라는 점을 참고해주세요. 최종 판단은 전문가 확인이 필요합니다.",
   },
 ];
 
@@ -156,24 +157,31 @@ export default function FaqPage() {
         description="담보책임기간 계산과 하자 판정에 관해 자주 나오는 질문을 모았습니다."
       />
 
-      <div className="mx-auto max-w-2xl px-5 py-10">
-      <div className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white shadow-sm">
-        {FAQ_ITEMS.map((item, i) => (
-          <details key={i} className="group px-5 py-4 open:bg-slate-50">
-            <summary className="flex cursor-pointer list-none items-start gap-3 font-semibold text-slate-900 marker:content-none">
-              <span className="mt-0.5 shrink-0 text-sm text-emerald-600">Q{i + 1}</span>
-              <span className="flex-1">{item.q}</span>
-              <span className="shrink-0 text-slate-400 transition group-open:rotate-45">+</span>
-            </summary>
-            <div className="mt-3 pl-7 text-sm leading-7 text-slate-600">{item.a}</div>
-          </details>
-        ))}
-      </div>
+      <div className="mx-auto max-w-2xl px-5 py-12">
+        <div className="divide-y divide-line-soft overflow-hidden rounded-2xl border border-line bg-surface">
+          {FAQ_ITEMS.map((item, i) => (
+            <details key={i} className="group px-5 py-4 open:bg-inset">
+              <summary className="flex cursor-pointer list-none items-start gap-3 font-semibold text-ink marker:content-none">
+                <span className="tnum mt-0.5 shrink-0 text-sm text-accent">Q{i + 1}</span>
+                <span className="flex-1">{item.q}</span>
+                <PlusIcon
+                  size={16}
+                  weight="bold"
+                  aria-hidden="true"
+                  className="mt-1 shrink-0 text-ink-3 transition group-open:rotate-45"
+                />
+              </summary>
+              <div className="mt-3 pl-7 text-sm leading-7 text-ink-2">{item.a}</div>
+            </details>
+          ))}
+        </div>
 
-      <p className="mt-6 text-xs text-slate-400">
-        이 페이지가 제공하는 정보는 참고용이며 법률 자문이 아닙니다. 실제 하자 여부 판정은 하자심사·분쟁조정위원회
-        또는 전문가 확인이 필요합니다.
-      </p>
+        <div className="mt-6">
+          <FootNote>
+            이 페이지가 제공하는 정보는 참고용이며 법률 자문이 아닙니다. 실제 하자 여부 판정은
+            하자심사·분쟁조정위원회 또는 전문가 확인이 필요합니다.
+          </FootNote>
+        </div>
       </div>
     </div>
   );

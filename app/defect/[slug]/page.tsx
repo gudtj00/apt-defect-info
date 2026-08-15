@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { ArrowLeftIcon, InfoIcon } from "@phosphor-icons/react/dist/ssr";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
@@ -28,17 +29,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (isNamedSlug(slug)) {
     const doc = getNamedPageDoc(slug);
     const name = String(doc?.frontmatter.name ?? slug);
-    return { title: `${name} 하자 — 하자 유형 검색`, description: `${name} 관련 하자판정기준 고시 조문과 담보책임기간 정리.` };
+    return { title: `${name} 하자 | 하자 유형 검색`, description: `${name} 관련 하자판정기준 고시 조문과 담보책임기간 정리.` };
   }
   const type = getDefectByCode(slug);
   if (!type) return {};
   return {
-    title: `${type.judgmentArticle}(${type.name}) — 하자 유형 검색`,
+    title: `${type.judgmentArticle}(${type.name}) | 하자 유형 검색`,
     description: type.plainExplanation ?? `${type.judgmentArticle}(${type.name}) 판정 기준 원문과 담보책임기간.`,
   };
 }
 
 const isNamedSlug = (slug: string) => NAMED_PAGES.some((p) => p.slug === slug);
+
+/**
+ * 법령 본문 안의 표는 열이 고정 폭이라 좁은 화면에서 페이지 자체를 가로로 밀어낸다.
+ * (375px 기기에서 문서 폭이 489px까지 벌어졌다.)
+ * 표만 자기 안에서 옆으로 넘기도록 감싼다.
+ */
+const MARKDOWN_COMPONENTS = {
+  table: (props: React.ComponentProps<"table">) => (
+    <div className="-mx-1 overflow-x-auto px-1">
+      <table {...props} />
+    </div>
+  ),
+};
 
 function ArticleLinkList({ articles }: { articles: string[] }) {
   return (
@@ -50,7 +64,7 @@ function ArticleLinkList({ articles }: { articles: string[] }) {
           <li key={a}>
             <Link
               href={`/defect/${link.slug}`}
-              className="inline-block rounded-full border border-slate-200 bg-white px-3 py-1 text-sm text-slate-700 no-underline hover:border-emerald-300 hover:text-emerald-600"
+              className="inline-block rounded-full border border-line bg-surface px-3 py-1 text-sm text-ink-2 no-underline transition hover:border-accent-line hover:bg-accent-soft hover:text-accent-soft-ink"
             >
               {link.label}
             </Link>
@@ -65,31 +79,31 @@ function ArticleLinkList({ articles }: { articles: string[] }) {
 function FrequencyChart({ currentSlug }: { currentSlug: string }) {
   const maxShare = Math.max(...phenomena.ranking.map((r) => r.share));
   return (
-    <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-      <p className="mb-3 text-xs font-semibold text-slate-500">전체 하자 유형 6개 중 발생 빈도</p>
+    <div className="mt-4 rounded-2xl border border-line bg-surface p-4">
+      <p className="mb-3 text-xs font-semibold text-ink-2">전체 하자 유형 6개 중 발생 빈도</p>
       <div className="flex flex-col gap-2">
         {phenomena.ranking.map((r) => {
           const isCurrent = PHENOMENON_SLUG[r.name] === currentSlug;
           const widthPct = (r.share / maxShare) * 100;
           return (
             <div key={r.name} className="flex items-center gap-2 text-xs">
-              <span className={"w-24 shrink-0 " + (isCurrent ? "font-bold text-emerald-700" : "text-slate-500")}>
+              <span className={"w-24 shrink-0 " + (isCurrent ? "font-bold text-accent" : "text-ink-2")}>
                 {r.rank}위 · {r.name}
               </span>
-              <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+              <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-inset">
                 <div
-                  className={"h-full rounded-full " + (isCurrent ? "bg-emerald-600" : "bg-slate-300")}
+                  className={"h-full rounded-full " + (isCurrent ? "bg-accent" : "bg-line")}
                   style={{ width: `${widthPct}%` }}
                 />
               </div>
-              <span className={"w-11 shrink-0 text-right " + (isCurrent ? "font-bold text-emerald-700" : "text-slate-400")}>
+              <span className={"tnum w-11 shrink-0 text-right " + (isCurrent ? "font-bold text-accent" : "text-ink-3")}>
                 {(r.share * 100).toFixed(1)}%
               </span>
             </div>
           );
         })}
       </div>
-      <p className="mt-3 text-[0.7rem] text-slate-400">
+      <p className="mt-3 text-[0.7rem] text-ink-3">
         하자심사·분쟁조정위원회 통계(2021년~2026년 2월 누적 {phenomena.note.match(/([\d,]+)건 접수/)?.[1] ?? ""}건 접수 기준)
       </p>
     </div>
@@ -105,17 +119,19 @@ function NamedPage({ slug }: { slug: string }) {
   const sourceUrl = typeof fm.sourceUrl === "string" ? fm.sourceUrl : null;
 
   return (
-    <div className="mx-auto max-w-3xl px-5 py-8">
-      <p className="mb-2">
-        <Link href="/defect" className="text-sm text-slate-500 no-underline hover:text-emerald-600">
-          ← 하자 유형 검색으로
-        </Link>
-      </p>
-      <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">{name}</h1>
+    <div className="mx-auto max-w-3xl px-5 py-10">
+      <Link
+        href="/defect"
+        className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-2 no-underline hover:text-accent"
+      >
+        <ArrowLeftIcon size={14} weight="bold" aria-hidden="true" />
+        하자 유형 검색으로
+      </Link>
+      <h1 className="mt-3 text-2xl font-bold tracking-tight text-ink">{name}</h1>
 
       {relatedArticles && (
         <div className="mt-3">
-          <p className="mb-2 text-sm text-slate-600">
+          <p className="mb-2 text-sm leading-7 text-ink-2">
             이 현상은 아래 {relatedArticles.length}개 조문에 걸쳐 공통으로 나타나요. 조문별 자세한 내용은 아래
             링크에서 확인해보세요.
           </p>
@@ -126,13 +142,15 @@ function NamedPage({ slug }: { slug: string }) {
       <FrequencyChart currentSlug={slug} />
 
       <article className="defect-markdown mt-2">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{doc.content}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
+          {doc.content}
+        </ReactMarkdown>
       </article>
 
       {sourceUrl && (
-        <p className="mt-6 text-xs text-slate-400">
+        <p className="mt-6 text-xs text-ink-3">
           원문 출처:{" "}
-          <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-slate-400">
+          <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-ink-3 underline">
             국가법령정보센터
           </a>
         </p>
@@ -143,8 +161,8 @@ function NamedPage({ slug }: { slug: string }) {
 
 function StepHeading({ n, children }: { n: number; children: React.ReactNode }) {
   return (
-    <h2 className="mt-8 mb-3 flex items-center gap-2 text-lg font-bold text-slate-900">
-      <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">
+    <h2 className="mt-8 mb-3 flex items-center gap-2 text-lg font-bold text-ink">
+      <span className="tnum inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-on-accent">
         {n}
       </span>
       {children}
@@ -154,7 +172,7 @@ function StepHeading({ n, children }: { n: number; children: React.ReactNode }) 
 
 function LawQuote({ text }: { text: string }) {
   return (
-    <blockquote className="whitespace-pre-wrap rounded-r-lg border-l-[3px] border-emerald-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
+    <blockquote className="whitespace-pre-wrap rounded-r-lg border-l-[3px] border-accent-line bg-inset p-4 text-sm leading-7 text-ink-2">
       {text}
     </blockquote>
   );
@@ -162,8 +180,9 @@ function LawQuote({ text }: { text: string }) {
 
 function Callout({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mt-2 rounded-lg border-l-[3px] border-amber-400 bg-amber-50 px-3 py-2 text-sm text-amber-800">
-      📌 {children}
+    <p className="mt-2 flex gap-2 rounded-lg border-l-[3px] border-warn-line bg-warn px-3 py-2 text-sm leading-7 text-warn-ink">
+      <InfoIcon size={16} weight="bold" aria-hidden="true" className="mt-1 shrink-0" />
+      <span>{children}</span>
     </p>
   );
 }
@@ -179,7 +198,7 @@ function ProcedureBlock({
 }) {
   return (
     <div className="mb-4">
-      <p className="mb-2 text-sm font-semibold text-slate-700">{label}</p>
+      <p className="mb-2 text-sm font-semibold text-ink">{label}</p>
       {articles.length > 0 ? (
         <div className="flex flex-col gap-2">
           {articles.map((a) => (
@@ -187,7 +206,7 @@ function ProcedureBlock({
           ))}
         </div>
       ) : (
-        <p className="text-sm text-amber-700">확인 필요</p>
+        <p className="text-sm text-warn-ink">확인 필요</p>
       )}
       {note && <Callout>{note}</Callout>}
     </div>
@@ -205,22 +224,24 @@ function ArticleReferencePage({ code }: { code: string }) {
   const repairCostArticles = getProcedureArticleTexts(type.repairCostArticle);
 
   return (
-    <div className="mx-auto max-w-3xl px-5 py-8">
-      <p className="mb-2">
-        <Link href="/defect/articles" className="text-sm text-slate-500 no-underline hover:text-emerald-600">
-          ← 전체 조문 목록으로
-        </Link>
-      </p>
-      <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">
+    <div className="mx-auto max-w-3xl px-5 py-10">
+      <Link
+        href="/defect/articles"
+        className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-2 no-underline hover:text-accent"
+      >
+        <ArrowLeftIcon size={14} weight="bold" aria-hidden="true" />
+        전체 조문 목록으로
+      </Link>
+      <h1 className="mt-3 text-2xl font-bold tracking-tight text-ink">
         {type.judgmentArticle}({type.name})
       </h1>
 
       {type.plainExplanation ? (
-        <div className="mt-4 rounded-2xl bg-emerald-50 p-4 text-[0.95rem] leading-7 text-slate-800">
+        <div className="mt-4 rounded-2xl border border-accent-line bg-accent-soft p-4 text-[0.95rem] leading-7 text-accent-soft-ink">
           {type.plainExplanation}
         </div>
       ) : (
-        <p className="mt-4 text-sm text-slate-400">
+        <p className="mt-4 text-sm leading-7 text-ink-3">
           하자판정기준 고시 조문 원문 그대로이며, 아직 쉬운 말 풀이는 준비되지 않았습니다.
         </p>
       )}
@@ -229,7 +250,7 @@ function ArticleReferencePage({ code }: { code: string }) {
       {articleText ? (
         <LawQuote text={articleText} />
       ) : (
-        <p className="text-sm text-slate-400">원문을 확보하지 못했습니다 — 확인 필요.</p>
+        <p className="text-sm text-ink-3">원문을 확보하지 못했습니다. 확인 필요.</p>
       )}
 
       <StepHeading n={2}>이렇게 확인하고 보수비용을 계산해요</StepHeading>
@@ -238,31 +259,31 @@ function ArticleReferencePage({ code }: { code: string }) {
 
       <StepHeading n={3}>담보책임기간</StepHeading>
       {warranty ? (
-        <p className="text-sm text-slate-800">
+        <p className="text-sm text-ink">
           <strong className="text-base">
             {warranty.name} · {warranty.years}년
           </strong>
           {type.warrantyCategoryNote && (
-            <span className="mt-1 block text-sm text-slate-500">{type.warrantyCategoryNote}</span>
+            <span className="mt-1 block text-sm leading-7 text-ink-2">{type.warrantyCategoryNote}</span>
           )}
         </p>
       ) : (
-        <p className="text-sm text-slate-400">해당하는 시설공사 분류가 없습니다.</p>
+        <p className="text-sm text-ink-3">해당하는 시설공사 분류가 없습니다.</p>
       )}
-      <p className="mt-2 text-xs text-slate-400">
+      <p className="mt-2 text-xs leading-6 text-ink-3">
         정확한 우리 아파트의 잔여 기간은 단지별 담보책임기간 계산기에서 확인하세요.
       </p>
 
       {type.phenomenonTags.length > 0 && (
         <>
           <StepHeading n={4}>관련 현상</StepHeading>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm leading-7 text-ink-2">
             이 조문은 다음 현상 분류와도 관련돼요: {type.phenomenonTags.join(", ")}
           </p>
         </>
       )}
 
-      <p className="mt-8 text-xs text-slate-400">
+      <p className="mt-8 text-xs leading-6 text-ink-3">
         이 페이지가 제공하는 정보는 참고용이며 법률 자문이 아닙니다. 실제 하자 여부 판정은 하자심사·분쟁조정위원회
         또는 전문가 확인이 필요합니다.
       </p>

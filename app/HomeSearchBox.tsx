@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
 type Suggestion = { slug: string; name: string; address: string };
 
@@ -69,45 +70,58 @@ export default function HomeSearchBox({ defaultValue }: { defaultValue: string }
 
   return (
     <div ref={wrapperRef} className="relative">
-      {/* 검색 결과는 /calculator가 받는다 — 홈은 소개 페이지로 분리했다. */}
-      <form method="get" action="/calculator" className="flex gap-2 rounded-full bg-slate-50 p-1.5 ring-1 ring-slate-200">
-        <input
-          type="text"
-          name="q"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => suggestions.length > 0 && setOpen(true)}
-          placeholder="예: 고덕센트럴 아이파크"
-          autoComplete="off"
-          className="flex-1 rounded-full border-none bg-transparent px-5 py-3.5 text-base text-slate-900 outline-none placeholder:text-slate-400"
-        />
-        <button
-          type="submit"
-          aria-label="검색"
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-slate-900 text-white transition hover:bg-emerald-700"
-        >
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round">
-            <circle cx="11" cy="11" r="7" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-        </button>
+      {/* 검색 결과는 /calculator가 받는다. 홈은 소개 페이지로 분리했다. */}
+      <form method="get" action="/calculator">
+        {/* 입력란의 이름을 placeholder로만 알리면 글자를 넣는 순간 사라진다. 라벨을 따로 둔다. */}
+        <label htmlFor="apt-q" className="mb-2 block text-sm font-semibold text-ink">
+          단지명
+        </label>
+        <div className="flex gap-2 rounded-full border border-line bg-inset p-1.5">
+          <input
+            id="apt-q"
+            type="text"
+            name="q"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onFocus={() => suggestions.length > 0 && setOpen(true)}
+            placeholder="예: 고덕센트럴 아이파크"
+            autoComplete="off"
+            role="combobox"
+            aria-expanded={open}
+            aria-autocomplete="list"
+            aria-controls="apt-suggest-list"
+            className="min-w-0 flex-1 rounded-full border-none bg-transparent px-5 py-3.5 text-base text-ink outline-none placeholder:text-ink-3"
+          />
+          <button
+            type="submit"
+            aria-label="검색"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-on-accent transition hover:bg-accent-hover active:translate-y-px"
+          >
+            <MagnifyingGlassIcon size={20} weight="bold" aria-hidden="true" />
+          </button>
+        </div>
       </form>
 
       {open && suggestions.length > 0 && (
-        <ul className="absolute z-10 mt-2 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+        <ul
+          id="apt-suggest-list"
+          role="listbox"
+          className="absolute z-10 mt-2 w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-lg shadow-slate-900/5"
+        >
           {suggestions.map((s, i) => (
-            <li key={s.slug}>
+            <li key={s.slug} role="option" aria-selected={i === highlight}>
               <button
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => selectSuggestion(s)}
                 className={
-                  "block w-full px-5 py-3 text-left transition " + (i === highlight ? "bg-emerald-50" : "hover:bg-slate-50")
+                  "block w-full px-5 py-3 text-left transition " +
+                  (i === highlight ? "bg-accent-soft" : "hover:bg-inset")
                 }
               >
-                <div className="font-semibold text-slate-900">{s.name}</div>
-                <div className="text-sm text-slate-500">{s.address}</div>
+                <div className="font-semibold text-ink">{s.name}</div>
+                <div className="text-sm text-ink-2">{s.address}</div>
               </button>
             </li>
           ))}

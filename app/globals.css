@@ -1,15 +1,186 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   디자인 토큰
+   --------------------------------------------------------------------------
+   색을 유틸리티에 직접 박지 않고(bg-white / text-slate-900 식) 의미 이름으로
+   한 겹 감쌌다. 이유는 두 가지다.
+
+   1) 다크 모드를 파일마다 `dark:` 짝을 붙여 관리하면 반드시 어딘가 빠진다.
+      값을 여기 한 곳에서만 바꾸면 전 페이지가 같이 따라온다.
+   2) 강조색을 한 번에 바꿀 수 있다. 예전에 파랑 → 에메랄드로 갈아엎을 때
+      전 파일을 훑어야 했다.
+
+   @theme inline 은 토큰이 런타임에 값이 바뀌는 var()를 가리킬 때 쓰는 형태다.
+   (일반 @theme 은 값을 빌드 시점에 고정해버려서 미디어쿼리로 못 바꾼다.)
+   ========================================================================== */
+
+@theme inline {
+  --color-canvas: var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-inset: var(--c-inset);
+
+  --color-line: var(--c-line);
+  --color-line-soft: var(--c-line-soft);
+
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-ink-3: var(--c-ink-3);
+
+  --color-accent: var(--c-accent);
+  --color-accent-hover: var(--c-accent-hover);
+  --color-on-accent: var(--c-on-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-accent-soft-ink: var(--c-accent-soft-ink);
+  --color-accent-line: var(--c-accent-line);
+
+  --color-warn: var(--c-warn);
+  --color-warn-ink: var(--c-warn-ink);
+  --color-warn-line: var(--c-warn-line);
+
+  --color-danger: var(--c-danger);
+
+  /* 화면 하나를 통째로 어둡게 쓰는 구간(홈 3번째 섹션 등). 밝은 테마에서는
+     대비 블록으로, 어두운 테마에서는 배경보다 한 단 더 가라앉은 면으로 쓴다.
+     페이지 중간에 테마가 뒤집히지 않게 하려는 것. */
+  --color-deep: var(--c-deep);
+  --color-deep-ink: var(--c-deep-ink);
+  --color-deep-ink-2: var(--c-deep-ink-2);
+  --color-deep-line: var(--c-deep-line);
+  /* 어두운 면 위의 강조색. 밝은 테마의 --c-accent(짙은 초록)를 그대로 쓰면
+     어두운 배경에서 3.3:1로 묻힌다. 그 면에서는 밝은 초록으로 뒤집는다. */
+  --color-deep-accent: var(--c-deep-accent);
+
+  --font-sans: var(--font-hajapt-sans), "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  color-scheme: light;
+
+  --c-canvas: #f8fafc;
+  --c-surface: #ffffff;
+  --c-inset: #f1f5f9;
+
+  --c-line: #e2e8f0;
+  --c-line-soft: #f1f5f9;
+
+  --c-ink: #0f172a;
+  --c-ink-2: #475569;
+  /* 각주·캡션에 쓰는 가장 흐린 글자색. slate-400(#94a3b8)이나 #7c8ba1은
+     흰 배경에서 대비가 3.2~3.5:1이라 AA(4.5:1)에 못 미친다. 흐리게 보이되
+     읽히는 선(흰 배경 5.1:1, --c-inset 위 4.7:1)까지만 내린다. */
+  --c-ink-3: #5f6f84;
+
+  /* emerald-600(#059669)은 흰 글씨와 대비가 3.8:1이라 본문 크기 버튼에서 AA에
+     못 미친다. 그래서 채움색·글자색 모두 emerald-700(5.5:1)을 기준으로 쓴다. */
+  --c-accent: #047857;
+  --c-accent-hover: #065f46;
+  --c-on-accent: #ffffff;
+  --c-accent-soft: #ecfdf5;
+  --c-accent-soft-ink: #065f46;
+  --c-accent-line: #a7f3d0;
+
+  --c-warn: #fffbeb;
+  --c-warn-ink: #78350f;
+  --c-warn-line: #fde68a;
+
+  /* 입력 오류용. 상태색이라 강조색 규칙(한 가지)의 예외로 둔다. */
+  --c-danger: #b91c1c;
+
+  --c-deep: #0f172a;
+  --c-deep-ink: #ffffff;
+  --c-deep-ink-2: #cbd5e1;
+  --c-deep-line: #2c3a52;
+  --c-deep-accent: #34d399;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* 순검정(#000)은 쓰지 않는다. 깊이감이 사라지고 OLED에서 경계가 튄다. */
+    --c-canvas: #0b1120;
+    --c-surface: #111a2b;
+    --c-inset: #16202f;
+
+    --c-line: #253349;
+    --c-line-soft: #1b2637;
+
+    --c-ink: #e8edf5;
+    --c-ink-2: #aab7c9;
+    --c-ink-3: #8494a8;
+
+    /* 어두운 면 위에서는 채도 높은 짙은 초록이 묻힌다. 밝은 초록을 면으로 깔고
+       글자를 어둡게 뒤집는 쪽이 대비가 훨씬 낫다(7.5:1). */
+    --c-accent: #34d399;
+    --c-accent-hover: #6ee7b7;
+    --c-on-accent: #052e21;
+    --c-accent-soft: #0d2f26;
+    --c-accent-soft-ink: #6ee7b7;
+    --c-accent-line: #1f5d48;
+
+    --c-warn: #2a2008;
+    --c-warn-ink: #fcd34d;
+    --c-warn-line: #57430f;
+
+    --c-danger: #fca5a5;
+
+    --c-deep: #060c17;
+    --c-deep-ink: #e8edf5;
+    --c-deep-ink-2: #94a3b8;
+    --c-deep-line: #1e293b;
+    --c-deep-accent: #34d399;
+  }
+}
+
+/* ==========================================================================
+   한글 타이포그래피
+   ========================================================================== */
+
+html {
+  /* 한글은 기본값(break-all에 가까운 동작)으로 두면 단어 한가운데서 줄이 바뀐다.
+     "담보책임기" / "간" 처럼 끊기는 것이 그 경우다. keep-all이 이걸 막는다.
+     대신 아주 긴 영문·URL이 넘칠 수 있어 anywhere를 같이 준다. */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+  background: var(--c-canvas);
+  color: var(--c-ink);
+  /* 한글 본문은 라틴 문자보다 행간을 넉넉히 줘야 읽힌다. */
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* 숫자를 표·계산 결과에서 세로로 맞추기 위한 것. 잔여 일수처럼 자릿수가
+   들쭉날쭉한 값이 흔들려 보이지 않게 한다. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 키보드 사용자에게만 보이는 포커스 링. 강조색으로 통일한다. */
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   법령 본문 마크다운
+   조문 원문·해설이 렌더되는 영역. 위 토큰을 그대로 따라간다.
+   ========================================================================== */
 
 .defect-markdown {
   counter-reset: step;
@@ -37,8 +208,8 @@ body {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 999px;
-  background: #059669;
-  color: #fff;
+  background: var(--c-accent);
+  color: var(--c-on-accent);
   font-size: 0.85rem;
   font-weight: 700;
 }
@@ -46,24 +217,24 @@ body {
   font-size: 1rem;
   font-weight: 700;
   margin: 1.2rem 0 0.5rem;
-  color: #065f46;
+  color: var(--c-accent-soft-ink);
 }
 .defect-markdown p {
-  line-height: 1.7;
+  line-height: 1.8;
   margin: 0.7rem 0;
 }
 .defect-markdown strong {
   font-weight: 700;
 }
 .defect-markdown a {
-  color: #059669;
+  color: var(--c-accent);
   text-decoration: underline;
 }
 .defect-markdown ul,
 .defect-markdown ol {
   margin: 0.7rem 0;
   padding-left: 1.3rem;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 .defect-markdown ul {
   list-style: none;
@@ -78,11 +249,11 @@ body {
   content: "";
   position: absolute;
   left: 0.15rem;
-  top: 0.65rem;
-  width: 0.4rem;
-  height: 0.4rem;
+  top: 0.72rem;
+  width: 0.35rem;
+  height: 0.35rem;
   border-radius: 999px;
-  background: #34d399;
+  background: var(--c-accent);
 }
 .defect-markdown ol > li {
   margin: 0.4rem 0;
@@ -90,11 +261,11 @@ body {
 .defect-markdown blockquote {
   margin: 0.8rem 0;
   padding: 0.7rem 1rem;
-  border-left: 3px solid #6ee7b7;
-  background: #f8fafc;
-  color: #334155;
+  border-left: 3px solid var(--c-accent-line);
+  background: var(--c-inset);
+  color: var(--c-ink-2);
   font-size: 0.92rem;
-  line-height: 1.7;
+  line-height: 1.8;
   border-radius: 0 8px 8px 0;
 }
 .defect-markdown blockquote p {
@@ -104,9 +275,9 @@ body {
 .defect-markdown blockquote blockquote {
   margin: 0.6rem 0 0;
   padding: 0.6rem 0.9rem;
-  border-left: 3px solid #fbbf24;
-  background: #fffbeb;
-  color: #92400e;
+  border-left: 3px solid var(--c-warn-line);
+  background: var(--c-warn);
+  color: var(--c-warn-ink);
   font-size: 0.85rem;
 }
 .defect-markdown table {
@@ -117,13 +288,13 @@ body {
 }
 .defect-markdown th,
 .defect-markdown td {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--c-line);
   padding: 0.5rem 0.6rem;
   text-align: left;
   vertical-align: top;
 }
 .defect-markdown th {
-  background: #f8fafc;
+  background: var(--c-inset);
   font-weight: 700;
 }
 /* 정확히 3열인 표(설비·조문 등 짧은 라벨 + 긴 설명)는 앞 두 열을 좁게 고정해 줄바꿈을 막는다 */
@@ -137,5 +308,5 @@ body {
 .defect-markdown hr {
   margin: 1.5rem 0;
   border: none;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--c-line);
 }

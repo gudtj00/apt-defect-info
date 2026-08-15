@@ -78,8 +78,9 @@ export default function Reveal({
     <div
       ref={ref}
       style={{ transitionDelay: hidden ? "0ms" : `${delay}ms` }}
-      className={`transition-all duration-700 ease-out ${
-        hidden ? "translate-y-6 opacity-0" : "translate-y-0 opacity-100"
+      // 정보 전달이 목적인 화면이라 연출은 최소로 둔다. 시선이 따라오는 정도면 충분하다.
+      className={`transition-all duration-500 ease-out ${
+        hidden ? "translate-y-4 opacity-0" : "translate-y-0 opacity-100"
       }`}
     >
       {children}

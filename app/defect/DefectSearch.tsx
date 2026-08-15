@@ -33,26 +33,29 @@ export default function DefectSearch({ items }: { items: DefectSearchItem[] }) {
 
   return (
     <div>
-      <div className="relative">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="예: 벽지 들뜸, 물이 새요, 창문이 안 닫혀요"
-          className="w-full rounded-2xl border border-slate-200 bg-white px-5 py-3.5 text-base text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
-        />
-      </div>
+      {/* 입력란 이름은 라벨로 따로 둔다. placeholder는 예시만 담당한다. */}
+      <label htmlFor="defect-q" className="mb-2 block text-sm font-semibold text-ink">
+        겪고 있는 증상
+      </label>
+      <input
+        id="defect-q"
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="예: 벽지 들뜸, 물이 새요, 창문이 안 닫혀요"
+        className="w-full rounded-full border border-line bg-surface px-5 py-3.5 text-base text-ink outline-none placeholder:text-ink-3 focus:border-accent"
+      />
 
       {isFloorNoiseQuery && (
-        <div className="mt-3 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">
+        <div className="mt-3 rounded-2xl border border-warn-line bg-warn px-4 py-3 text-sm leading-7 text-warn-ink">
           층간소음은 이 고시(하자판정기준)가 다루는 대상이 아닙니다. 「공동주택 층간소음의 범위와 기준에 관한
           규칙」등 별도 기준으로 다뤄지는 사안이라, 이 서비스에서는 안내해드릴 수 없습니다.
         </div>
       )}
 
       {trimmed && !isFloorNoiseQuery && results.length === 0 && (
-        <div className="mt-3 rounded-xl bg-slate-100 px-4 py-3 text-sm text-slate-600">
-          관련된 하자 유형을 찾지 못했습니다. 아래 현상별 목록에서 찾아보시거나, 표현을 바꿔 다시 검색해보세요.
+        <div className="mt-3 rounded-2xl border border-line bg-inset px-4 py-3 text-sm leading-7 text-ink-2">
+          관련된 하자 유형을 찾지 못했습니다. 옆의 현상별 목록에서 찾아보시거나, 표현을 바꿔 다시 검색해보세요.
         </div>
       )}
 
@@ -62,23 +65,23 @@ export default function DefectSearch({ items }: { items: DefectSearchItem[] }) {
             <li key={item.code}>
               <Link
                 href={`/defect/${item.slug}`}
-                className="block rounded-xl border border-slate-200 bg-white px-4 py-3 text-inherit no-underline shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md"
+                className="block rounded-2xl border border-line bg-surface px-4 py-3 text-inherit no-underline transition hover:border-accent-line active:translate-y-px"
               >
                 <div className="flex items-baseline justify-between gap-2">
-                  <span className="font-semibold text-slate-900">
+                  <span className="font-semibold text-ink">
                     {item.article}({item.name})
                   </span>
                   {item.tags.length > 0 && (
-                    <span className="shrink-0 text-xs text-emerald-600">{item.tags.join(" · ")}</span>
+                    <span className="shrink-0 text-xs text-accent">{item.tags.join(" · ")}</span>
                   )}
                 </div>
                 {item.explanation && (
-                  <p className="mt-1 line-clamp-2 text-sm text-slate-600">{item.explanation}</p>
+                  <p className="mt-1 line-clamp-2 text-sm text-ink-2">{item.explanation}</p>
                 )}
               </Link>
             </li>
           ))}
-          <li className="pt-1 text-center text-xs text-slate-400">
+          <li className="pt-1 text-center text-xs text-ink-3">
             정확한 하자 여부 판정은 하자심사·분쟁조정위원회 또는 전문가 확인이 필요합니다.
           </li>
         </ul>

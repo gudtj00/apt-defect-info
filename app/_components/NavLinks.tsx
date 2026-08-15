@@ -49,8 +49,12 @@ export default function NavLinks() {
   const pathname = usePathname() ?? "/";
 
   return (
-    // 좁은 화면에서는 5개가 한 줄에 안 들어가므로 가로 스크롤로 둔다.
-    <div className="flex items-center gap-1 overflow-x-auto text-sm sm:gap-2">
+    // 좁은 화면에서는 6개가 한 줄에 안 들어가므로 가로 스크롤로 둔다.
+    // 스크롤바가 보이면 헤더 높이가 들쭉날쭉해져서 숨긴다.
+    <nav
+      aria-label="주요 메뉴"
+      className="flex items-center gap-0.5 overflow-x-auto text-sm [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-1 [&::-webkit-scrollbar]:hidden"
+    >
       {NAV.map((item) => {
         const active = item.isActive(pathname);
         return (
@@ -59,16 +63,16 @@ export default function NavLinks() {
             href={item.href}
             aria-current={active ? "page" : undefined}
             // 활성/비활성 모두 같은 여백을 줘서 이동할 때 글자 위치가 흔들리지 않게 한다.
-            className={`shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 no-underline transition ${
+            className={`shrink-0 whitespace-nowrap rounded-full px-2.5 py-1.5 no-underline transition ${
               active
-                ? "bg-emerald-50 font-semibold text-emerald-700"
-                : "text-slate-600 hover:bg-slate-50 hover:text-emerald-600"
+                ? "bg-accent-soft font-semibold text-accent-soft-ink"
+                : "text-ink-2 hover:bg-inset hover:text-ink"
             }`}
           >
             {item.label}
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 }
